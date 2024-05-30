@@ -2,6 +2,7 @@ package com.glabs.commonService;
 
 import com.glabs.payload.response.SubCategoriesResponse;
 import jakarta.annotation.PostConstruct;
+import lombok.Getter;
 import lombok.Setter;
 import org.bson.Document;
 import org.springframework.data.mongodb.core.query.Query;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 @Service
 public class ProductService {
 
-    @Setter
+    @Getter
     private String collectionEnd;
     private final MongoService mongoService;
     private Set<String> filteredCollection;
@@ -30,6 +31,11 @@ public class ProductService {
         this.filteredCollection = mongoService.getAllCollectionName().stream()
                 .filter(collection -> collection.contains(collectionEnd))
                 .collect(Collectors.toSet());
+    }
+
+    public void setCollectionEnd(String end){
+        this.collectionEnd = end;
+        updateFilteredCollection();
     }
 
     private void updateFilteredCollection(){
