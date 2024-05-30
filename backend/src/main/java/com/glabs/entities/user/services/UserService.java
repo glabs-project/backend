@@ -70,13 +70,13 @@ public class UserService {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
+                    .body(new MessageResponse("Username is already taken"));
         }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Error: Email is already in use!"));
+                    .body(new MessageResponse("Email is already in use!"));
         }
 
         User user = new User(
@@ -170,6 +170,7 @@ public class UserService {
     }
 
     public ResponseEntity<?> resendEmailConfirmCode(Map<String, Object> data) {
+
         String code = VerificationCodeGenerator.generateCode();
         EmailVerificationToken token = new EmailVerificationToken();
         token.setEmail((String) data.get("email"));
@@ -189,6 +190,10 @@ public class UserService {
             } else {
                 throw new BindException(bindingResult);
             }
+        }
+
+        if (userRepository.findByUsername(loginRequest.getUsername()).isEmpty()){
+            return ResponseEntity.notFound().build();
         }
 
         if (!userRepository.findByUsername(loginRequest.getUsername()).get().getEnabled()){
