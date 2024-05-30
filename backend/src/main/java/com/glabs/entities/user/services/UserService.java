@@ -3,6 +3,7 @@ package com.glabs.entities.user.services;
 
 import com.glabs.commonRepositories.EmailVerificationTokenRepository;
 import com.glabs.commonService.EmailService;
+import com.glabs.commonService.RedisService;
 import com.glabs.models.EmailVerificationToken;
 import com.glabs.scripts.VerificationCodeGenerator;
 import com.glabs.shared.ERole;
@@ -52,6 +53,7 @@ public class UserService {
     private final JwtUtils jwtUtils;
     private final EmailVerificationTokenRepository emailVerificationTokenRepository;
     private final EmailService emailService;
+    private final RedisService redisService;
 
     public ResponseEntity<?> createUser(SignUpRequest signUpRequest,
                                         BindingResult bindingResult,
@@ -125,8 +127,7 @@ public class UserService {
         token.setExpiryDate(LocalDateTime.now().plusMinutes(timerForCode));
         emailVerificationTokenRepository.save(token);
         emailService.sendVerificationCode(user.getEmail(), code);
-
-
+        redisService.saveVerificationDetails(signUpRequest.getEmail(), signUpRequest.getPassword(), code);
         return ResponseEntity.ok().body(new MessageResponse("code send"));
     }
 
@@ -138,11 +139,12 @@ public class UserService {
 
         if (emailVerificationToken.getExpiryDate().isAfter(LocalDateTime.now())) {
             emailVerificationTokenRepository.delete(emailVerificationToken);
+            RedisService.VerificationDetails details = redisService.getVerificationDetails(email);
             User user = userRepository.findByEmail(email).get();
             user.setEnabled(true);
             userRepository.save(user);
             Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+                    new UsernamePasswordAuthenticationToken(user.getUsername(), details.getHashedPassword()));
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = jwtUtils.generateJwtToken(authentication);
