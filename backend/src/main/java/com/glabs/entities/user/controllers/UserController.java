@@ -21,16 +21,21 @@ public class UserController {
     private final UserService userService;
     private final UserRepository userRepository;
 
-    @ModelAttribute("user")
-    public User getUser(@RequestParam("id") String id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("No such user."));
-    }
-
     @GetMapping()
     public ResponseEntity<List<User>> getAll() {
         return userService.getAll();
     }
+
+    @ModelAttribute("user")
+    public User getUser(@RequestParam(value = "id", required = false) String id) {
+        if (id != null) {
+            return userRepository.findById(id)
+                    .orElseThrow(() -> new NoSuchElementException("No such user."));
+        } else {
+            return null;
+        }
+    }
+
 
     @GetMapping(params = "id")
     public ResponseEntity<?> getById(@RequestParam String id, @ModelAttribute("user") User user) {

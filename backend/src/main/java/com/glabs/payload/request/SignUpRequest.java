@@ -2,6 +2,7 @@ package com.glabs.payload.request;
 
 import java.util.Set;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
@@ -17,7 +18,7 @@ public class SignUpRequest {
 
     @NotBlank
     private String password;
-
+    @Schema(description = "Роль/Роли передаются массивом", example = "[user], [admin], [user, admin]")
     private Set<String> roles;
 
     private String firstName;
