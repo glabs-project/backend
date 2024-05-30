@@ -170,6 +170,7 @@ public class UserService {
     }
 
     public ResponseEntity<?> resendEmailConfirmCode(Map<String, Object> data) {
+
         String code = VerificationCodeGenerator.generateCode();
         EmailVerificationToken token = new EmailVerificationToken();
         token.setEmail((String) data.get("email"));
