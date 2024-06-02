@@ -51,7 +51,8 @@ public class AuthController {
             description = "Позволяет зарегистрировать пользователя. При успешной операции отправляется код подвтерждения на потчу"
     )
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "400", description = "Username is already taken - username занят, Email is already taken - email занят"),
+            @ApiResponse(responseCode = "400", description = "Username is already use - username занят, Email is already taken - email занят, " +
+                    "Phone is already in use - phoneNumber занят"),
             @ApiResponse(responseCode = "200", description = "OK - code send")
                     })
     @PostMapping("/signup")

@@ -70,13 +70,18 @@ public class UserService {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Username is already taken"));
+                    .body(new MessageResponse("Username is already use"));
         }
 
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+        else if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse("Email is already in use!"));
+                    .body(new MessageResponse("Email is already in use"));
+        }
+        else if (userRepository.existsByPhoneNumber(signUpRequest.getPhoneNumber())){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse(("Phone is already in use")));
         }
 
         User user = new User(
