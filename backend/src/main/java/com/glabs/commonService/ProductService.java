@@ -16,6 +16,10 @@ public class ProductService {
     private final MongoService mongoService;
 
     public ResponseEntity<?> addNewProduct(AddProductRequest request) {
+        if(!mongoService.doesCollectionExist(request.getSubCategory() + request.getCategory())){
+            return ResponseEntity.notFound().build();
+        }
+
         Assert.notNull(request.getCategory(), "Category must not be null");
         Assert.notNull(request.getSubCategory(), "SubCategory must not be null");
         ArrayList<Item> items = request.getItems();

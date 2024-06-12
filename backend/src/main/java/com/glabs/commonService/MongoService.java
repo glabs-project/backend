@@ -37,4 +37,8 @@ public class MongoService {
     public void insertIntoCollection(Item item, String collectionName) {
         mongoTemplate.insert(item, collectionName);
     }
+
+    public boolean doesCollectionExist(String collectionName) {
+        return mongoTemplate.collectionExists(collectionName);
+    }
 }
