@@ -1,11 +1,13 @@
 package com.glabs.commonService;
 
+import com.glabs.payload.request.Item;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.bson.Document;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -30,5 +32,9 @@ public class MongoService {
 
     public List<Map> getDocumentsInCollection(String collectionName, Query query){
         return mongoTemplate.find(query, Map.class, collectionName);
+    }
+
+    public void insertIntoCollection(Item item, String collectionName) {
+        mongoTemplate.insert(item, collectionName);
     }
 }

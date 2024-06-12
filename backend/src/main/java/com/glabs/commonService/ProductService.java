@@ -1,95 +1,40 @@
 package com.glabs.commonService;
 
-import com.glabs.payload.response.SubCategoriesResponse;
-import jakarta.annotation.PostConstruct;
-import lombok.Getter;
-import lombok.Setter;
-import org.bson.Document;
-import org.springframework.data.mongodb.core.query.Query;
+import com.glabs.payload.request.AddProductRequest;
+import com.glabs.payload.request.Item;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
 
-    @Getter
-    private String collectionEnd;
     private final MongoService mongoService;
-    private Set<String> filteredCollection;
 
-    public ProductService(MongoService mongoService){
-        this.mongoService = mongoService;
+    public ResponseEntity<?> addNewProduct(AddProductRequest request) {
+        Assert.notNull(request.getCategory(), "Category must not be null");
+        Assert.notNull(request.getSubCategory(), "SubCategory must not be null");
+        ArrayList<Item> items = request.getItems();
+        Assert.notNull(items, "Items must not be null");
+
+        for (Item item : items) {
+            validateItem(item);
+            mongoService.insertIntoCollection(item, request.getSubCategory() + request.getCategory());
+        }
+
+        return ResponseEntity.ok().build();
     }
 
-    @PostConstruct
-    public void init() {
-        if (collectionEnd == null){
-            return;
-        }
-        this.filteredCollection = mongoService.getAllCollectionName().stream()
-                .filter(collection -> collection.contains(collectionEnd))
-                .collect(Collectors.toSet());
+    private void validateItem(Item item) {
+        Assert.notNull(item.name(), "Item name must not be null");
+        Assert.notNull(item.price(), "Item price must not be null");
+        Assert.notNull(item.type(), "Item type must not be null");
+        Assert.notNull(item.characteristics(), "Item characteristics must not be null");
+        Assert.notNull(item.images(), "Item images must not be null");
     }
 
-    public void setCollectionEnd(String end){
-        this.collectionEnd = end;
-        updateFilteredCollection();
-    }
-
-    private void updateFilteredCollection(){
-        this.filteredCollection = mongoService.getAllCollectionName().stream()
-                .filter(collection -> collection.contains(collectionEnd))
-                .collect(Collectors.toSet());
-    }
-
-    public Set<SubCategoriesResponse> getSubcategories(){
-        if (filteredCollection == null){
-            updateFilteredCollection();
-            return getSubcategories();
-        }
-        Set<SubCategoriesResponse> subCategories = new HashSet<>();
-        for (String collectionName : filteredCollection) {
-            SubCategoriesResponse subCategoriesResponse = new SubCategoriesResponse(collectionName, mongoService.getCountOfDocumentsInCollection(collectionName));
-            subCategories.add(subCategoriesResponse);
-        }
-        return subCategories;
-    }
-
-    public Set<String> getBrands(){
-        if (filteredCollection == null){
-            updateFilteredCollection();
-            return getBrands();
-        }
-        Set<String> brands = new HashSet<>();
-        for (String collectionName : filteredCollection) {
-            List<Document> documents = mongoService.getAllDocumentInCollection(collectionName);
-            for (Document document : documents) {
-                Object characteristics = document.get("characteristics");
-                for (Object characteristic : (Iterable<?>) characteristics) {
-                    String characteristicString = (String) characteristic;
-                    if (characteristicString.startsWith("Производитель:")) {
-                        String brand = characteristicString.substring("Производитель:".length()).trim();
-                        brands.add(brand);
-                    }
-                }
-            }
-        }
-        return brands;
-    }
-
-    public Map<String, Object> getProductMap(){
-        if (filteredCollection == null){
-            updateFilteredCollection();
-            return getProductMap();
-        }
-        Query query = new Query();
-        query.fields().exclude("_id");
-        Map<String, Object> productDataMap = new HashMap<>();
-        for (String collectionName : filteredCollection) {
-            productDataMap.put(collectionName, mongoService.getDocumentsInCollection(collectionName, query));
-        }
-        return productDataMap;
-    }
 }

@@ -1,6 +1,6 @@
 package com.glabs.entities.strings.services;
 
-import com.glabs.commonService.ProductService;
+import com.glabs.commonService.ProductConfigService;
 import com.glabs.payload.response.ProductResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class StringService {
 
-    private final ProductService productService;
+    private final ProductConfigService productService;
 
     public ProductResponse getAllStrings(){
         productService.setCollectionEnd("String");
