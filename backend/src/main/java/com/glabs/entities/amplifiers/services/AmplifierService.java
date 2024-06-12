@@ -1,6 +1,6 @@
 package com.glabs.entities.amplifiers.services;
 
-import com.glabs.commonService.ProductService;
+import com.glabs.commonService.ProductConfigService;
 import com.glabs.payload.response.ProductResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AmplifierService {
 
-    private final ProductService productService;
+    private final ProductConfigService productService;
 
     public ProductResponse getAllAmp() {
         productService.setCollectionEnd("Amp");
