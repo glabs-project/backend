@@ -1,23 +1,22 @@
-package com.glabs.entities.strings.services;
+package com.glabs.entities.switching.services;
 
 import com.glabs.commonService.ProductConfigService;
 import com.glabs.payload.response.ProductResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@RequiredArgsConstructor
 @Service
-public class StringService {
+@RequiredArgsConstructor
+public class SwitchingService {
 
     private final ProductConfigService productService;
 
-    public ProductResponse getAllStrings(){
-        productService.setCollectionEnd("String");
+    public ProductResponse getAllSwitching(){
+        productService.setCollectionEnd("Switching");
         return ProductResponse.builder()
-                .category("string")
+                .category("switching")
                 .subCategories(productService.getSubcategories())
                 .brands(productService.getBrands())
                 .products(productService.getProductMap()).build();
     }
-
 }

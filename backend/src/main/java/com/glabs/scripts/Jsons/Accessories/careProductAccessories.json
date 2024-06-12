@@ -1,0 +1,91 @@
+{
+  "careProductAccessories": [
+    {
+      "name": "Лимонное масло Dunlop 6554 Fretboard 65 Ultimate Lemon Oil 118 мл.",
+      "price": "850 ₽",
+      "type": "new",
+      "characteristics": [
+        "Код товара: 405087",
+        "Тип: Лимонное масло",
+        "Производитель: Dunlop",
+        "Серия: Formula 65",
+        "Состояние: Новое",
+        "Страна производства: США",
+        "Артикул: 6554",
+        "Вес: 0.12 кг"
+      ],
+      "images": [
+        "https://skifmusic.ru/thumbs/04/ca/600x600_1_normal_ae75886b2605acaab35d594da8a6.webp",
+        "https://skifmusic.ru/thumbs/dd/8a/600x600_1_normal_88bd2861f81e9085ac87063bf7ec.webp",
+        "https://skifmusic.ru/thumbs/ae/40/600x600_1_normal_665f197e6ab50c34f6c99ea30c56.webp",
+        "https://skifmusic.ru/thumbs/73/e0/600x600_1_normal_a82cad7efc6acf9cffa531c9c762.webp",
+        "https://skifmusic.ru/thumbs/f9/d0/600x600_1_normal_d809ac18d2880a8c21897160675f.webp",
+        "https://skifmusic.ru/thumbs/fc/14/600x600_1_normal_3150bb9211f0ebbf76d395d4ba4c.webp",
+        "https://skifmusic.ru/thumbs/74/ed/600x600_1_normal_ad6d18e1aeff6963a68a8c637984.webp",
+        "https://skifmusic.ru/thumbs/db/01/600x600_1_normal_f79d683bf9f7aa387b7e8bbc6749.webp"
+      ]
+    },
+    {
+      "name": "Полироль для гитары Ernie Ball 4222, флакон 120 мл с салфеткой",
+      "price": "965 ₽",
+      "type": "new",
+      "characteristics": [
+        "Код товара: 437248",
+        "Тип: Полироль для гитары",
+        "Производитель: Ernie Ball",
+        "Состояние: Новое",
+        "Страна производства: США",
+        "Покрытие гитары: матовое, глянцевое",
+        "Артикул: P04222",
+        "Вес: 0.18 кг"
+      ],
+      "images": [
+        "https://skifmusic.ru/thumbs/b4/2d/600x600_1_normal_0eec86dca968a6d87333f669689c.webp",
+        "https://skifmusic.ru/thumbs/f0/ce/600x600_1_normal_85a751c50663482a6337bf66f077.webp",
+        "https://skifmusic.ru/thumbs/fa/20/600x600_1_normal_66e3698bdd656e80807fb1f73e19.webp",
+        "https://skifmusic.ru/thumbs/bf/3d/600x600_1_normal_6f0b3629516b922041ca89067ab9.webp"
+      ]
+    },
+    {
+      "name": "Увлажнитель для акустической гитары Planet Waves GH",
+      "price": "1 668 ₽",
+      "type": "new",
+      "characteristics": [
+        "Код товара: 287426",
+        "Тип: Увлажнитель для гитары",
+        "Производитель: Planet Waves",
+        "Серия: Humidification",
+        "Состояние: Новое",
+        "Страна производства: США",
+        "Инструмент: акустическая гитара",
+        "Артикул: GH",
+        "Вес: 0.05 кг"
+      ],
+      "images": [
+        "https://skifmusic.ru/thumbs/24/f4/600x600_1_normal_243c1e9ae12bf3969c63bc7ecbb5.webp",
+        "https://skifmusic.ru/thumbs/4f/e3/600x600_1_normal_10d832d99a93a4ca02ce492b98fd.webp",
+        "https://skifmusic.ru/thumbs/ba/71/600x600_1_normal_5323d652bab55b2b29999516d0ae.webp"
+      ]
+    },
+    {
+      "name": "Полироль для гитары Dunlop 654C Formula 65, 120 мл",
+      "price": "930 ₽",
+      "type": "new",
+      "characteristics": [
+        "Код товара: 405109",
+        "Тип: Полироль для гитары",
+        "Производитель: Dunlop",
+        "Серия: Formula 65",
+        "Состояние: Новое",
+        "Артикул: 654C",
+        "Вес: 0.15 кг",
+        "Страна бренда: США"
+      ],
+      "images": [
+        "https://skifmusic.ru/thumbs/e8/f3/600x600_1_normal_d5a2b3c992235157e821f6a201f6.webp",
+        "https://skifmusic.ru/thumbs/2d/d5/600x600_1_normal_9f74c7ec75a2e2b0462442988806.webp",
+        "https://skifmusic.ru/thumbs/78/7b/600x600_1_normal_16437434bd280dfc6cc931dcf5e0.webp"
+      ]
+    }
+  ]
+}
